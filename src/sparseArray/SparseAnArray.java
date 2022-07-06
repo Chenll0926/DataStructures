@@ -4,27 +4,32 @@ import java.io.Serializable;
 
 public class SparseAnArray implements Serializable {
     int sum;
-    int sparseArr[][] = new int[sum + 1][3];
 
     public int getSum() {
         return sum;
     }
 
-    public int[][] getSparseArr() {
-        return sparseArr;
+//    public int[][] getSparseArr() {
+//        return sparseArr;
+//    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
     }
 
-    public void makeSum(int array[][]){
-        for(int[] row : array){
-            for(int i = 0; i < array.length; i++){
-                if(row[i] != 0){
-                    sum++;
-                }
-            }
-        }
-    }
+    //    public void makeSum(int array[][]){
+//        for(int[] row : array){
+//            for(int i = 0; i < array.length; i++){
+//                if(row[i] != 0){
+//                    sum++;
+//                }
+//            }
+//        }
+//    }
 
-    public void makeSparseArr(int array[][]){
+    public int[][] makeSparseArr(int array[][]){
+        int sparseArr[][] = new int[sum + 1][3];
+
         sparseArr[0][0] = array.length;
         sparseArr[0][1] = array.length;
         sparseArr[0][2] = sum;
@@ -40,5 +45,6 @@ public class SparseAnArray implements Serializable {
                 }
             }
         }
+        return sparseArr;
     }
 }
