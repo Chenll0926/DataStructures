@@ -44,19 +44,11 @@ public class SerializableTest {
         }
 
         SparseAnArray sparseAnArray = new SparseAnArray();
-//        sparseAnArray.makeSum(chessArr);
         sparseAnArray.setSum(sum);
 
         File file = new File("d:/map.data");
         FileOutputStream fos = new FileOutputStream(file);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-//        for(int[] row : sparseAnArray.sparseArr){
-//            for(int data : row){
-//                oos.writeObject(data);
-//                oos.writeObject(" ");
-//            }
-//            oos.writeObject("\r\n");
-//        }
         oos.writeObject(sparseAnArray.makeSparseArr(chessArr));
         System.out.println("序列化完成");
         oos.close();
@@ -67,7 +59,6 @@ public class SerializableTest {
         File file = new File("d:/map.data");
         FileInputStream fis = new FileInputStream(file);
         ObjectInputStream ois = new ObjectInputStream(fis);
-//        SparseAnArray sparseAnArray = (SparseAnArray) ois.readObject();
         int[][] sparseArr = (int[][]) ois.readObject();
         System.out.println("反序列化完成");
         return sparseArr;
