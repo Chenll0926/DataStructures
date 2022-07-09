@@ -107,6 +107,7 @@ class ArrayQueue{
     public void showQueue(){
         if(isEmpty()){
             System.out.println("The queue is empty");
+            return;
         }
 
         for(int i = 0; i < arr.length; i++){
