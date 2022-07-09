@@ -65,7 +65,7 @@ class ArrayQueue{
     public ArrayQueue(int arrMaxSize){
         maxSize = arrMaxSize;
         arr = new int[maxSize];
-        front = -1; //指向队列头部，分析出front是指向对额头的前一个位置
+        front = -1; //指向队列头部，分析出front是指向队列头的前一个位置
         rear = -1; //指向队列尾，指向队列尾的数据（即队列最后一个数据）
     }
 
