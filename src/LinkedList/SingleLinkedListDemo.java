@@ -223,7 +223,7 @@ class SingleLinkedList{
         }
 
         if(flag){
-            temp.name = heroNode.name;;
+            temp.name = heroNode.name;
             temp.nickName = heroNode.nickName;
         }else{
             //没有找到节点
