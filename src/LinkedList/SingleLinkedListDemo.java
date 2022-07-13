@@ -40,6 +40,99 @@ public class SingleLinkedListDemo {
 
         singleLinkedList.delete(1);
         singleLinkedList.list();
+        System.out.println();
+
+        //测试求单链表中有效节点的个数
+        System.out.println("有效节点个数：" + getLength(singleLinkedList.getHead()));
+        System.out.println();
+
+        //测试 是否得到倒数第k个节点
+        HeroNode res = findLastIndexNode(singleLinkedList.getHead(),3);
+        System.out.println("res = " + res);
+        System.out.println();
+
+        //测试 单链表的反转
+        singleLinkedList.list();
+        reverseList(singleLinkedList.getHead());
+        System.out.println();
+        System.out.println("After reverse");
+        singleLinkedList.list();
+    }
+
+    //单链表的反转
+    public static void reverseList(HeroNode head){
+        //如果单链表为空或者只有一个节点，无需反转
+        if(head.next == null || head.next.next == null){
+            return;
+        }
+
+        HeroNode temp = head.next;
+        HeroNode next = null; //指向当前节点temp的下一个节点
+        HeroNode reverseHead = new HeroNode(0, "", "");
+
+        //遍历原来的链表，每遍历一个节点，就将其取出，并放在新链表reverseHead的最前端
+        while(temp != null){
+            next = temp.next; //暂时保持当前节点的下一个节点
+            temp.next = reverseHead.next; //将temp的下一个节点指向新的链表的头节点
+            reverseHead.next = temp; //把 temp连接到新的链表上
+            temp = next;
+        }
+
+        //将 head.next 指向 reverseHead.next，实现单链表的反转
+        head.next = reverseHead.next;
+
+    }
+
+    //查找单链表中的倒数第k个节点
+    /*
+        1.编写一个方法接收head节点，同时接受一个index
+        2.index 表示是倒数第index个节点
+        3.先把链表从头到尾遍历，得到链表的总长度getLength
+        4.得到size后，从链表的第一个开始遍历，遍历（size - index）个，就可以得到
+        5.如果找到了返回该节点，找不到返回null
+     */
+    public static HeroNode findLastIndexNode(HeroNode head, int index){
+        //判断如果链表为空
+        if(head.next == null){
+            return null;
+        }
+
+        //第一次遍历得到链表长度
+        int size = getLength(head);
+        //第二次遍历 size - index 位置，就是我们倒数的第k个节点
+        //先做一个index的校验
+        if(index <= 0 || index > size){
+            return null;
+        }
+
+        //定义辅助变量。for循环定位到倒数的index
+        HeroNode temp = head.next;
+        for (int i = 0; i < size - index; i++){
+            temp = temp.next;
+        }
+
+        return temp;
+    }
+
+    //方法：获取到单链表节点的个数（如果是带头节点的链表，需求不统计头节点）
+    /**
+     *
+     * @param head 链表的头节点
+     * @return 返回的是有效节点的个数
+     */
+    public static int getLength(HeroNode head){
+        if(head.next == null){ //空链表
+            return 0;
+        }
+
+        int length = 0;
+        //定义一个辅助变量
+        HeroNode cur = head.next;
+        while (cur != null){
+            length++;
+            cur = cur.next;
+        }
+        return length;
     }
 }
 
@@ -47,6 +140,10 @@ public class SingleLinkedListDemo {
 class SingleLinkedList{
     //先初始化一个头节点，头节点不要动，不存放具体数据
     private HeroNode head = new HeroNode(0, "", "");
+
+    public HeroNode getHead() {
+        return head;
+    }
 
     //添加节点到单向链表
     /*
