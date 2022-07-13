@@ -11,18 +11,34 @@ public class SingleLinkedListDemo {
 
         //创建一个链表
         SingleLinkedList singleLinkedList = new SingleLinkedList();
+
         //加入
 //        singleLinkedList.add(hero1);
 //        singleLinkedList.add(hero2);
 //        singleLinkedList.add(hero3);
 //        singleLinkedList.add(hero4);
 
+        //按照编号的顺序加入
         singleLinkedList.addByOrder(hero1);
         singleLinkedList.addByOrder(hero4);
         singleLinkedList.addByOrder(hero3);
         singleLinkedList.addByOrder(hero2);
 
+        singleLinkedList.list();
+
+        //测试修改节点
+        HeroNode newHeroNode = new HeroNode(2,"小卢", "玉麒麟11");
+        singleLinkedList.update(newHeroNode);
+
+        System.out.println();
+        System.out.println("After update");
+
         //显示
+        singleLinkedList.list();
+        System.out.println();
+        System.out.println("After delete");
+
+        singleLinkedList.delete(1);
         singleLinkedList.list();
     }
 }
@@ -78,6 +94,76 @@ class SingleLinkedList{
         }else {
             heroNode.next = temp.next;
             temp.next = heroNode;
+        }
+    }
+
+    //修改节点的信息，根据编号no来修改，即no不能修改
+    /*
+        1.根据newHeroNode的no来修改即可
+     */
+    public void update(HeroNode heroNode){
+        //判断是否为空
+        if(head.next == null){
+            System.out.println("The list is empty");
+            return;
+        }
+
+        //找到需要修改的节点，根据no编号
+        //定义一个辅助变量
+        HeroNode temp = head.next;
+        boolean flag = false; //表示是否找到该节点
+
+        while(true){
+            if(temp == null){
+                break; //到了链表的结尾，表示链表遍历结束
+            }
+            if(temp.no == heroNode.no){
+                //找到要修改的节点
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+
+        if(flag){
+            temp.name = heroNode.name;;
+            temp.nickName = heroNode.nickName;
+        }else{
+            //没有找到节点
+            System.out.printf("The node with no %d is not found\n", heroNode.no);
+        }
+    }
+
+    //删除节点
+    /*
+        1.head不能动，因此需要一个temp辅助节点找到但删除节点的前一个节点
+        2.说明我们在比较是，是temp.next.no 和 需要删除的节点no比较
+     */
+    public void delete(int no){
+        if(head.next == null){
+            System.out.println("List is empty");
+            return;
+        }
+
+        HeroNode temp = head;
+        boolean flag = false; //判断是否找到待删除节点
+
+        while(true){
+            if(temp.next == null){
+                break; //已经在链表最后
+            }
+            if(temp.next.no == no){
+                flag = true;
+                break;
+            }
+            temp = temp.next;
+        }
+
+        if(flag){
+            //删除节点
+            temp.next = temp.next.next;
+        }else{
+            System.out.println("The node which want to be delete is not found");
         }
     }
 
