@@ -11,6 +11,8 @@ public class Josephus {
         CircleSingleLinkedList circleSingleLinkedList = new CircleSingleLinkedList();
         circleSingleLinkedList.addBoys(5);
         circleSingleLinkedList.showBoys();
+
+        circleSingleLinkedList.countBoys(1, 2, 5);
     }
 }
 
@@ -72,7 +74,47 @@ class CircleSingleLinkedList{
      *                  表示最初有几个小孩在圈里
      */
     public void countBoys(int startNo, int countNum, int nums){
+        if(first == null || startNo < 1 || startNo > nums){
+            System.out.println("输入参数有误");
+            return;
+        }
 
+        //辅助指针
+        Boy helper = first;
+
+        //让helper指针指向链表最后一个节点
+        while(true){
+            if(helper.getNext() == first){
+                break;
+            }
+
+            helper = helper.getNext();
+        }
+
+        //开始报数前，先让first和helper移动startNo - 1次
+        for(int i = 0; i < startNo - 1; i++){
+            first = first.getNext();
+            helper = helper.getNext();
+        }
+
+        //开始报数时，让first和helper同时移动countNum - 1次，然后出圈
+        while(true){
+            if(helper == first){
+                break; //说明圈中只有一个节点
+            }
+
+            //让helper和first同时移动countNum - 1次
+            for(int i = 0; i < countNum - 1; i++){
+                first = first.getNext();
+                helper = helper.getNext();
+            }
+
+            //此时first指向的节点就是要出圈的节点
+            System.out.printf("节点%d出圈\n", first.getNo());
+            first = first.getNext();
+            helper.setNext(first);
+        }
+        System.out.printf("最后留在圈里的节点%d", first.getNo());
     }
 }
 
