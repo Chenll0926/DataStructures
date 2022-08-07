@@ -112,7 +112,7 @@ public class ReversePolishMultiCalc {
                     }
                     stack.push(each);
                 }else if(RIGHT.equals(each)){
-                    // ")" 操作符，依次出栈入列直到空栈或者遇到了第一个 ")" 操作符，此时 ")" 出栈
+                    // ")" 操作符，依次出栈入列直到空栈或者遇到了第一个 "(" 操作符，此时 将"(" 出栈
                     while (!stack.isEmpty() && LEVEL_HIGH >= calLevel(stack.peek())){
                         if(LEVEL_HIGH == calLevel(stack.peek())){
                             stack.pop();
