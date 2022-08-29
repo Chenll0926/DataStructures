@@ -42,10 +42,10 @@ public class SelectSort {
                     min = arr[j];
                 }
             }
-            //if(minIndex != i){
+            if(minIndex != i){
                 arr[minIndex] = arr[i];
                 arr[i] = min;
-            //}
+            }
         }
     }
 }
