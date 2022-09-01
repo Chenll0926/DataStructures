@@ -26,7 +26,7 @@ public class QuickSort {
         System.out.println("排序前的时间是：" + date1Str);
 
 
-        quickSort(arr1, 0 , arr1.length - 1); //交换法
+        quickSort(arr1, 0 , arr1.length - 1);
 
         Date data2 = new Date();
         String date2Str = simpleDateFormat.format(data2);
